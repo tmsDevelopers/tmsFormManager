@@ -13,7 +13,7 @@ abstract  class BaseField{
     protected $TYPE = '';
     protected $VALUE = '';
 
-    abstract public function LoadConfig(array $config=array()){}
+    abstract public function LoadConfig(array $config=array());
 
     public function getClass()
     {
@@ -44,8 +44,9 @@ abstract  class BaseField{
         return $this->VALUE;
     }
 
-    public function setClass(string $class='')
+    public function setClass(string $class=NULL)
     {
+        if($class == NULL)return false;
         $class = trim($class);
         if($class=='')return false;
 
@@ -56,8 +57,9 @@ abstract  class BaseField{
         return true;
     }
 
-   public function setId(string $id='')
+   public function setId(string $id=NULL)
     {
+       if($id == NULL)return false;
         $id = trim($id);
         if($id=='')return false;
 
@@ -71,8 +73,9 @@ abstract  class BaseField{
         return true;
     }
 
-    public function setName(string $Name='')
+    public function setName(string $Name=NULL)
     {
+        if($name == NULL)return false;;
         $name = trim($name);
         if($name=='')return false;
 
@@ -97,7 +100,7 @@ abstract  class BaseField{
     }
     */
     
-    public function setValue(string $value='')
+    public function setValue(string $value= NULL)
     {
         $this->VALUE = $value;
         return true;

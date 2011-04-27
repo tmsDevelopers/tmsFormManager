@@ -7,19 +7,16 @@ namespace tmsFormManager;
 
 abstract  class Encoder implements IFencoder{
 
-    protected  static $CONFIG_FILE = '';
+    protected   $CONFIG_FILE = '';
 
-    abstract  public static function ReloadConfigfile()
-    {
-        
-    }
+    abstract  public  function ReloadConfigfile();
 
-    public static function setConfigfile(string $path ='')
+    public function setConfigfile($path =NULL)
     {
+        if($path == NULL)return false; 
         $path = trim($path);
         if(!file_exists($path))return false;
-
-        self::$CONFIG_FILE = $path;
+        $this->CONFIG_FILE = $path;
         return true;
     }
 

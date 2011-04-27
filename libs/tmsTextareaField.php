@@ -30,8 +30,9 @@ class TextareaField extends BaseField {
         return $this->ROWS;
     }
 
-    public function setCols(integer $cols=0)
+    public function setCols(integer $cols= NULL)
     {
+        if($cols == NULL) return false;
         if($cols != (int) $cols) return false;
 
         if($cols === 0)
@@ -42,8 +43,9 @@ class TextareaField extends BaseField {
         return true;
     }
 
-    public function setRows(integer $rows=0)
+    public function setRows(integer $rows=NULL)
     {
+        if($rows == NULL)return false;
         if($rows != (int) $rows) return false;
 
         if($rows === 0)

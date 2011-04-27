@@ -1,0 +1,6 @@
+## YAML Template.
+---
+forms:
+  test:
+    fields:
+      -{id: name, type: text}

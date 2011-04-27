@@ -6,7 +6,7 @@
 namespace tmsFormManager;
 
 interface IFencoder{
-    public function ReloadConfigfile(){}    // load configuration into array
-    public function setConfigfile(){}       // set path to configuration file
+    //public function ReloadConfigfile();    // load configuration into array
+    public    function setConfigfile();       // set path to configuration file
 }
 ?>

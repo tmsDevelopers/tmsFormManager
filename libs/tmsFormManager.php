@@ -12,35 +12,76 @@ namespace tmsFormManager;
 class FormManager {
     protected $Encoder = null;    // object of encoder
     protected $CONFIG = array() ; // array of forms configuration
+    protected $CURRENT_FORM_ID = ''; // id of form to work with
 
-    public function setEncoderMethod(string $method='')
+    public function setEncoderMethod($method=NULL)
     {
+        if($method==NULL)return false;
         $method = trim($method) ;
-        if(!preg_match('/^[a-z0-9_]+$/', $method)) return false;
+        if(!preg_match('/^[a-z0-9_]+$/i', $method)) return false;
 
-        $class_name = $method.'Encoder';
+        $class_name = 'tmsFormManager\\'.$method.'Encoder';
         if(!class_exists($class_name)) return false;
 
         $this->Encoder = new $class_name();
+        
         return true;
     }
 
-    public function setConfigfile(string $file_path='')
+    protected function cleen_vars()
     {
-        if(!is_object($this->Encoder)) return false;
+        $this->CURRENT_FORM_ID = '';
+    }
 
+    public function setConfigfile(  $file_path=NULL)
+    {
+        if($file_path== NULL)return false;
+        if(!is_object($this->Encoder)) return false;
+       
         return $this->Encoder->setConfigFile($file_path);
     }
 
     public function ReloadConfig()
     {
         if(!is_object($this->Encoder)) return false;
-
+        
         $config = $this->Encoder->ReloadConfigfile();
+        
         if(($config===false) || (!is_array($config)))return false;
 
         $this->CONFIG = $config;
+        $this->cleen_vars();
+        //print_r($this->CONFIG);
         return true;
+    }
+
+
+    /**
+     * Метод задаёт форму, с которой будет производиться работа по её id
+     * @param string $id
+     * @return boolean
+     */
+    public function setForm($id=NULL)
+    {
+        if($id == NULL)return false;
+        $id = trim($id);
+        if($id=='')return false;
+
+        $n = count($this->CONFIG);
+        if($n == 0)return false;
+
+        foreach($this->CONFIG as $form_id => $form)
+            if($form_id == $id)
+            {
+                $this->CURRENT_FORM_ID = $id;
+                return true;
+            }
+        return false;
+    }
+
+    public function getHTMLfield($id=NULL)
+    {
+
     }
 
 }

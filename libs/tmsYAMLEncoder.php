@@ -13,13 +13,16 @@ namespace tmsFormManager;
 
 class YAMLEncoder extends Encoder{
 
-    protected  static $CONFIG_FILE = '';
+    //protected  static $CONFIG_FILE = '';
+    public function __construct(){//echo "ololo";
+        
+    }
 
-    public static function ReloadConfigfile()
+    public function ReloadConfigfile()
     {
-        if(file_exists(self::CONFIG_FILE))
+        if(file_exists($this->CONFIG_FILE))
 	{
-            $data = Spyc::YAMLLoad(self::CONFIG_FILE);
+            $data = \Spyc::YAMLLoad($this->CONFIG_FILE);
             return $data;
 	}
 	return false;

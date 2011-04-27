@@ -13,6 +13,7 @@ class FormManager {
     protected $Encoder = null;    // object of encoder
     protected $CONFIG = array() ; // array of forms configuration
     protected $CURRENT_FORM_ID = ''; // id of form to work with
+    protected $FORMS = array() ;    // array of form objects
 
     public function setEncoderMethod($method=NULL)
     {
@@ -31,6 +32,14 @@ class FormManager {
     protected function cleen_vars()
     {
         $this->CURRENT_FORM_ID = '';
+        
+        if(count($this->FORMS)>0)
+        {
+            foreach($this->FORMS as $form)
+                    $form->__destruct() ;
+        }
+        $this->FORMS = array() ;
+
     }
 
     public function setConfigfile(  $file_path=NULL)
@@ -78,6 +87,33 @@ class FormManager {
             }
         return false;
     }
+
+    protected  function createFormById($id=NULL)
+    {
+        if($id == NULL)return false;
+        $id = trim($id);
+        if($id=='')return false;
+
+        $n = count($this->CONFIG);
+        if($n == 0)return false;
+
+        foreach($this->CONFIG as $form_id => $form)
+            if($form_id == $id)
+            {
+                if(!\array_key_exists($id,  $this->FORMS))
+                {
+                    $form = new \tmsFormManager\Form();
+                    if($form->setConfig($this->CONFIG[$id]))
+                    {
+                        $this->FORMS[$id] = $form;
+                        return true;
+                    }
+                }
+                return false;
+            }
+        return false;
+    }
+
 
     public function getHTMLfield($id=NULL)
     {

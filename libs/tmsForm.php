@@ -10,6 +10,23 @@ namespace tmsFormManager;
  * @author chipset
  */
 class Form {
-    //put your code here
+
+    protected  $CONFIG = array() ;  // array of configuration parametrs
+
+    public function setConfig($config = array())
+    {
+        if(!is_array($config))return false;
+
+        $this->CONFIG = $config;
+        return true;
+    }
+
+    public function buildForm()
+    {
+        
+    }
+
+
+
 }
 ?>

@@ -18,5 +18,9 @@ class SelectField  extends BaseField{
     public function  LoadConfig(array $config = array()) {
         
     }
+
+    public function getHTML() {}
+
+    public function setValue() {}
 }
 ?>

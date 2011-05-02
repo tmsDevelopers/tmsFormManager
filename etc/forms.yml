@@ -3,4 +3,4 @@
 forms:
   test:
     fields:
-      -{id: name, type: text}
+      -{id: txtname, type: text, value: test, class: tmsinput}

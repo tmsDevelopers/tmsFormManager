@@ -60,6 +60,15 @@ class FormManager {
 
         $this->CONFIG = $config;
         $this->cleen_vars();
+
+        $n = count($this->CONFIG['forms']);
+        if($n>0)
+        {
+            foreach ($this->CONFIG['forms'] as $formid => $formconfig)
+            {
+                $this->createFormById($formid);
+            }
+        }
         //print_r($this->CONFIG);
         return true;
     }
@@ -76,10 +85,10 @@ class FormManager {
         $id = trim($id);
         if($id=='')return false;
 
-        $n = count($this->CONFIG);
+        $n = count($this->CONFIG['forms']);
         if($n == 0)return false;
 
-        foreach($this->CONFIG as $form_id => $form)
+        foreach($this->CONFIG['forms'] as $form_id => $form)
             if($form_id == $id)
             {
                 $this->CURRENT_FORM_ID = $id;
@@ -94,17 +103,18 @@ class FormManager {
         $id = trim($id);
         if($id=='')return false;
 
-        $n = count($this->CONFIG);
+        $n = count($this->CONFIG['forms']);
         if($n == 0)return false;
 
-        foreach($this->CONFIG as $form_id => $form)
+        foreach($this->CONFIG['forms'] as $form_id => $form)
             if($form_id == $id)
             {
                 if(!\array_key_exists($id,  $this->FORMS))
                 {
                     $form = new \tmsFormManager\Form();
-                    if($form->setConfig($this->CONFIG[$id]))
+                    if($form->setConfig($this->CONFIG['forms'][$id]))
                     {
+                        $form->buildForm();
                         $this->FORMS[$id] = $form;
                         return true;
                     }
@@ -117,7 +127,9 @@ class FormManager {
 
     public function getHTMLfield($id=NULL)
     {
-
+        if($this->CURRENT_FORM_ID == '')throw new \Exception('No form selected');
+        
+        return $this->FORMS[$this->CURRENT_FORM_ID]->getHTMLfield($id);
     }
 
 }

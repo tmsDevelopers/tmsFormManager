@@ -13,6 +13,9 @@ abstract  class BaseField{
     protected $TYPE = '';
     protected $VALUE = '';
 
+    protected $actions = array('onblur', 'onchange', 'onclick', 'ondblclick', 'onfocus', 'onkeydown', 'onkeypress', 'onkeyup', 'onload', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'onreset', 'onselect', 'onsubmit', 'onunload');
+
+
     protected $ACTION_ONBLUR='';
     protected $ACTION_ONCHANGE ='';
     protected $ACTION_ONCLICK = '';
@@ -293,5 +296,20 @@ abstract  class BaseField{
         $this->$action_name = $action;
         return true;
     }
+
+    protected function  setBaseActions($config=NULL)
+    {
+        if(($config == NULL) || (!\is_array($config))) return false;
+
+        $n = count($config) ;
+        if($n<1) return false;
+
+        foreach ($config as $key => $value)
+        {
+            if(\in_array(\strtolower($key), $this->actions))
+                $this->setAction ($key, $value);
+        }
+    }
+
 }
 ?>

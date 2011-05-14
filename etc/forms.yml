@@ -3,4 +3,4 @@
 forms:
   test:
     fields:
-      -{id: txtname, type: text, value: test, class: tmsinput}
+      -{id: txtname, type: text, value: test, class: tmsinput, onclick: 'alert(777);'}

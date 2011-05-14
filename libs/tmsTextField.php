@@ -43,7 +43,8 @@ class TextField extends BaseField{
         if(($this->ID=='')&&($this->NAME==''))return false;
 
         $result = '';
-        $result = $this->getBaseHTMLparametrs();
+        $result .= $this->getBaseHTMLparametrs();
+        $result  .= ' '.$this->getBaseHTMLactions();
 
         $result .= ' value="'.$this->VALUE.'" ';
         

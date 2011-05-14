@@ -32,6 +32,8 @@ class TextField extends BaseField{
                 $this->setId ($this->getName());
         }
 
+        $this->setBaseActions($config);
+
     }
 
     /**

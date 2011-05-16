@@ -3,4 +3,6 @@
 forms:
   test:
     fields:
-      -{id: txtname, type: text, value: test, class: tmsinput, onclick: 'alert(777);'}
+      -{id: "txtname[]", type: text, value: test0, class: tmsinput, onclick: 'alert(777);'}
+      -{id: "txtname[]", type: text, value: test1, class: tmsinput, onclick: 'alert(755);'}
+      -{id: "singletxtname", type: text, value: 'single test1', class: tmsinput, onclick: 'alert(754);'}

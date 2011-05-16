@@ -18,5 +18,8 @@ $form_manager->setConfigfile('etc/forms.yml'); // считываем конфи�
 $form_manager->ReloadConfig(); // обновляем данные менеджера на основе конфигурации
 
 $form_manager->setForm('test'); // указываем форму, с которой будем работать
-echo $form_manager->getHTMLfield('txtname'); // запрашиваем для выбранной формы html код поля
+//echo $form_manager->getHTMLfield('txtname[]'); // запрашиваем для выбранной формы html код поля
+//$form_manager->setLineDelimiter('<hr>');
+echo $form_manager->getHTMLfield('singletxtname');
+echo $form_manager->getHTMLfield('txtname[]');
 ?>

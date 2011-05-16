@@ -132,5 +132,12 @@ class FormManager {
         return $this->FORMS[$this->CURRENT_FORM_ID]->getHTMLfield($id);
     }
 
+    public function setLineDelimiter($delimiter=NULL)
+    {
+        if($this->CURRENT_FORM_ID == '')throw new \Exception('No form selected');
+
+        return $this->FORMS[$this->CURRENT_FORM_ID]->setLineDelimiter($delimiter);
+    }
+
 }
 ?>

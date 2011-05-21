@@ -16,13 +16,51 @@ class TextareaField extends BaseField {
     protected $COLS = false;  // default html
     protected $ROWS = false;  // default html
 
-    public function  LoadConfig(array $config = array()) {
-        
+    public function  LoadConfig(array $config = array())
+    {
+        if($config['id']!='')$this->setId ($config['id']);
+        if($config['name']!='')$this->setName ($config['name']);
+        if($config['value']!='')$this->setValue ($config['value']);
+        if($config['cols']!='')$this->setCols ($config['cols']);
+        if($config['rows']!='')$this->setRows ($config['rows']);
+        if($config['class']!='')$this->setClass ($config['class']);
+
+        if($this->getId()===false)
+        {
+            if($this->getName()===false)
+                throw new \Exception ('No field ID');
+            else
+                $this->setId ($this->getName());
+        }
+
+        $this->setBaseActions($config);
     }
 
-    public function getHTML() {}
-    public function  setValue() {
-        
+    public function getHTML()
+    {
+        if(($this->ID=='')&&($this->NAME==''))return false;
+
+        $result = '';
+        $result .= $this->getBaseHTMLparametrs();
+        $result  .= ' '.$this->getBaseHTMLactions();
+
+        if($this->COLS!=0) $result .= ' cols="'. $this->COLS.'" ';
+        if($this->ROWS!=0) $result .= ' rows="'. $this->ROWS.'" ';
+                
+        $result = '<textarea '.$result.'>'.$this->VALUE.'</textarea>';
+
+        return $result;
+    }
+
+    /**
+     * Метод задаёт значение элемента
+     * @param string $value
+     * @return boolean
+     */
+    public function  setValue($value= NULL)
+    {
+        $this->VALUE = $value;
+        return true;
     }
 
     /**
@@ -48,7 +86,7 @@ class TextareaField extends BaseField {
      * @param integer $cols
      * @return boolean
      */
-    public function setCols(integer $cols= NULL)
+    public function setCols($cols= NULL)
     {
         if($cols == NULL) return false;
         if($cols != (int) $cols) return false;
@@ -66,7 +104,7 @@ class TextareaField extends BaseField {
      * @param integer $rows
      * @return boolean
      */
-    public function setRows(integer $rows=NULL)
+    public function setRows($rows=NULL)
     {
         if($rows == NULL)return false;
         if($rows != (int) $rows) return false;

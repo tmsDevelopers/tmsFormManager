@@ -22,4 +22,5 @@ $form_manager->setForm('test'); // указываем форму, с котор�
 //$form_manager->setLineDelimiter('<hr>');
 echo $form_manager->getHTMLfield('singletxtname');
 echo $form_manager->getHTMLfield('txtname[]');
+echo $form_manager->getHTMLfield('testtextarea');
 ?>

@@ -7,7 +7,7 @@ namespace tmsFormManager;
 
 class TextField extends BaseField{
 
-    protected  $TYPE = 'input';
+    protected  $TYPE = 'text';
     protected  $SIZE = 10;
     protected  $MAXLENGTH = NULL;
 
@@ -21,7 +21,7 @@ class TextField extends BaseField{
         if($config['name']!='')$this->setName ($config['name']);
         if($config['value']!='')$this->setValue ($config['value']);
         if($config['size']!='')$this->setSize($config['size']);
-        if($config['maxlength']!='')$this->setMAXLENGTH ($config['maxlength']);
+        if($config['maxlength']!='')$this->setMaxlength ($config['maxlength']);
         if($config['class']!='')$this->setClass ($config['class']);
 
         if($this->getId()===false)
@@ -94,7 +94,7 @@ class TextField extends BaseField{
      * @param integer $size
      * @return boolean
      */
-    public function setMAXLENGTH($size = 0)
+    public function setMaxlength($size = 0)
     {
         $size = trim($size);
 

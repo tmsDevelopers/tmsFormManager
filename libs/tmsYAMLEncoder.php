@@ -1,13 +1,11 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of tmsYAMLEncoder
+ * YAMLEncoder is used to decode yaml encripted files
  *
- * @author chipset
+ * @author Morozov A.A.
+ * @email morozov_aa@tonymstudio.ru
+ * @site tonymstudio.ru
+ * @version 1
  */
 namespace tmsFormManager;
 

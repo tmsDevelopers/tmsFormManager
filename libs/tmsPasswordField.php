@@ -1,6 +1,6 @@
 <?php
 /**
- * class TextField used to describe text field
+ * class PasswordField used to describe <input type="password"> field
  *
  * @author Morozov A.A.
  * @email morozov_aa@tonymstudio.ru
@@ -9,9 +9,9 @@
  */
 namespace tmsFormManager;
 
-class TextField extends BaseField{
+class PasswordField extends BaseField{
 
-    protected  $TYPE = 'text';
+    protected  $TYPE = 'password';
     protected  $SIZE = 10;
     protected  $MAXLENGTH = NULL;
 
@@ -58,7 +58,7 @@ class TextField extends BaseField{
         
         if($this->MAXLENGTH!=NULL)$result .=' maxlength="'.  $this->MAXLENGTH.'" ';
 
-        $result = '<input type="text" '.$result.'>';
+        $result = '<input type="password" '.$result.'>';
 
 
         return $result;

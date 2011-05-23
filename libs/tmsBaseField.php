@@ -1,7 +1,11 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * class BaseField used to describe base properties and action common to all fields
+ *
+ * @author Morozov A.A.
+ * @email morozov_aa@tonymstudio.ru
+ * @site tonymstudio.ru
+ * @version 1
  */
 
 namespace tmsFormManager;

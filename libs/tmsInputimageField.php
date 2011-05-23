@@ -1,15 +1,15 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * class InputimageField used to describe <input type="image"> field
+ *
+ * @author Morozov A.A.
+ * @email morozov_aa@tonymstudio.ru
+ * @site tonymstudio.ru
+ * @version 1
  */
 namespace tmsFormManager;
-/**
- * Description of tmsInputImageField
- *
- * @author chipset
- */
-class InputImageField extends BaseField{
+
+class InputimageField extends BaseField{
     //put your code here
     protected $TYPE = 'inputimage';
     protected $SRC = '';
@@ -18,7 +18,7 @@ class InputImageField extends BaseField{
     protected $HSPACE = 0;
 
     /**
-     * Метод настраевает пустой объект типа ImageInput на основании передаваемых параметров
+     * Метод настраевает пустой объект типа Inputimage на основании передаваемых параметров
      * @param array $config
      */
     public function  LoadConfig(array $config = array())

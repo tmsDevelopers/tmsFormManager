@@ -4,6 +4,15 @@ forms:
   test:
     fields:
       -{id: "txtname[]", type: text, value: test0, class: tmsinput, onclick: 'alert(777);'}
+      -{id: "password", type: password, value: secret, class: tmsinput}
       -{id: "txtname[]", type: text, value: test1, class: tmsinput, onclick: 'alert(755);'}
       -{id: "singletxtname", type: text, value: 'single test1', class: tmsinput, onclick: 'alert(754);'}
       -{id: testtextarea, type: textarea, value: "ee", rows: 10, class: tmsinput, onclick: 'alert(753);'}
+      -{id: btnimage, type: inputimage, src: "images/btn.jpg", class: tmsinput, onclick: 'alert(\'fire !!!\');'}
+      -{id: "btnsubmit", type: inputsubmit, value: 'Submit button', class: tmsinput, onclick: 'alert(\'submit action\');'}
+      -{id: "btnreset", type: inputreset, value: 'Reset button', class: tmsinput, onclick: 'alert(\'reset action\');'}
+      -{id: "btnbutton", type: inputbutton, value: 'button', class: tmsinput, onclick: 'alert(\'button action\');'}
+      -{id: select1, type: select, class: tmsinput, size: 2, value: [{value: 1}, {value: 2, title: two, selected: true}, {value: 3, disabled: true}]}
+      -{id: select2, type: select, class: tmsinput, size: 2, value: [{value: 1}, {value: 2, title: two, selected: true}, {value: 3, disabled: true}]}
+      -{id: select3, type: select, class: tmsinput, size: 2, multiple: true, value: [{value: 1}, {value: 2, selected: true}, {value: 3}, {value: 4, selected: true}]}
+      -{id: "chbox1", type: checkbox, value: 'par1', checked: true, class: tmsinput, onclick: 'alert(753);'}

@@ -1,14 +1,14 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * class FormManager used to create an object to work with forms
+ *
+ * @author Morozov A.A.
+ * @email morozov_aa@tonymstudio.ru
+ * @site tonymstudio.ru
+ * @version 1
  */
 namespace tmsFormManager;
-/**
- * Description of tmsFormManager
- *
- * @author chipset
- */
+
 class FormManager {
     protected $Encoder = null;    // object of encoder
     protected $CONFIG = array() ; // array of forms configuration

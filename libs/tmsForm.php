@@ -1,14 +1,14 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * class Form used to create an object of selected form
+ *
+ * @author Morozov A.A.
+ * @email morozov_aa@tonymstudio.ru
+ * @site tonymstudio.ru
+ * @version 1
  */
 namespace tmsFormManager;
-/**
- * Description of tmsForm
- *
- * @author chipset
- */
+
 class Form {
 
     protected  $CONFIG = array() ;  // array of configuration parametrs

@@ -1,6 +1,6 @@
 <?php
 /**
- * class TextField used to describe text field
+ * class CheckboxField used to describe checkbox field
  *
  * @author Morozov A.A.
  * @email morozov_aa@tonymstudio.ru
@@ -9,11 +9,11 @@
  */
 namespace tmsFormManager;
 
-class TextField extends BaseField{
+class CheckboxField extends BaseField{
 
-    protected  $TYPE = 'text';
-    protected  $SIZE = 10;
-    protected  $MAXLENGTH = NULL;
+    protected  $TYPE = 'checkbox';
+    protected  $CHECKED = false;
+    
 
     /**
      * Метод настраевает пустой объект типа TextField на основании передаваемых параметров
@@ -24,8 +24,8 @@ class TextField extends BaseField{
         if($config['id']!='')$this->setId ($config['id']);
         if($config['name']!='')$this->setName ($config['name']);
         if($config['value']!='')$this->setValue ($config['value']);
-        if($config['size']!='')$this->setSize($config['size']);
-        if($config['maxlength']!='')$this->setMaxlength ($config['maxlength']);
+        if($config['checked']!='')$this->setChecked($config['checked']);
+        
         if($config['class']!='')$this->setClass ($config['class']);
 
         if($this->getId()===false)
@@ -54,11 +54,9 @@ class TextField extends BaseField{
 
         $result .= ' value="'.$this->VALUE.'" ';
         
-        $result .= ' size="'.  $this->SIZE.'" ';
-        
-        if($this->MAXLENGTH!=NULL)$result .=' maxlength="'.  $this->MAXLENGTH.'" ';
+        if($this->CHECKED===true)$result .=' checked="checked" ';
 
-        $result = '<input type="text" '.$result.'>';
+        $result = '<input type="checkbox" '.$result.'>';
 
 
         return $result;
@@ -78,35 +76,18 @@ class TextField extends BaseField{
 
 
     /**
-     * Метод устанавливает ширину элемента в символах (поумолчанию 10)
-     * @param integer $size
+     * Метод устанавливает/снимает отметку с элемента checkbox
+     * @param boolean $checked
      * @return boolean
      */
-    public function setSize($size = 0)
+    public function setChecked($checked=false)
     {
-        $size = trim($size);
+        if(!\in_array($checked,array(true, false)))return false;
 
-        if(!preg_match('/^[0-9]+$/', $size))
-                return false;
-
-        $this->SIZE = $size;
+        $this->CHECKED = $checked;
         return true;
     }
 
-    /**
-     * метод устанавливает максимальное количество символов допустимых для ввода в элемент 
-     * @param integer $size
-     * @return boolean
-     */
-    public function setMaxlength($size = 0)
-    {
-        $size = trim($size);
-
-        if(!preg_match('/^[0-9]+$/', $size))
-                return false;
-
-        $this->MAXLENGTH = $size;
-        return true;
-    }
+    
 }
 ?>

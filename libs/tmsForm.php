@@ -14,6 +14,13 @@ class Form {
     protected  $CONFIG = array() ;  // array of configuration parametrs
     protected $FIELDS = array() ; // array of fieldobjects
 
+    protected $ACCEPTCHARSET = null;
+    protected $ACTION = null;
+    protected $ENCTYPE = null;
+    protected $METHOD = 'post';
+    protected $ID = null;
+
+
     protected $DEFAULT_LINE_DELIMITER = '<br/>';
     protected $LINE_DELIMITER ='<br/>';
 
@@ -45,6 +52,18 @@ class Form {
      */
     public function buildForm()
     {
+
+        if($this->CONFIG['id']!='')$this->setId ($this->CONFIG['id']);
+        if($this->CONFIG['name']!='')$this->setName ($this->CONFIG['name']);
+
+        if($this->CONFIG['acceptcharset']!='')$this->setAcceptcharset($this->CONFIG['acceptcharset']);
+
+        if($this->CONFIG['action']!='')$this->setAction ($this->CONFIG['action']);
+
+        if($this->CONFIG['enctype']!='')$this->setEnctype ($this->CONFIG['enctype']);
+
+        if($this->CONFIG['method']!='')$this->setMethod($this->CONFIG['method']);
+
         $n = count($this->CONFIG['fields']);
         if($n>0)
         {
@@ -134,7 +153,60 @@ class Form {
         
     }
 
+    public function setAcceptcharset($charset=null)
+    {
+        $charset = trim($charset);
+        if(\is_null($charset))return false;
+        $this->ACCEPTCHARSET = $charset;
+        return true;
+    }
 
+    public function setAction($action=null)
+    {
+        $action = trim($action);
+        if(\is_null($action))return false;
+        $this->ACTION = $action;
+        return true;
+    }
 
+    public function setEnctype($enctype=null)
+    {
+        $enctype = trim($enctype);
+        if(\is_null($enctype))return false;
+        $this->ENCTYPE = $enctype;
+        return true;
+    }
+
+    public function setMethod($method = 'post')
+    {
+        $method = \strtolower(trim($method));
+        if(!\in_array($method,array('get', 'post')))$this->METHOD = 'post';
+        else $this->METHOD=$method;
+        return true;
+    }
+
+    public function setId($id = null)
+    {
+        $id = trim($id);
+        if(($id=='') ||(\is_null($id)) )throw new Exception('Form must have ID (Name)');
+        $this->ID = $id;
+        return true;
+    }
+
+    public function setName($name=null)
+    {
+        return $this->setId($name);
+    }
+
+    public function getId()
+    {
+        if(is_null($this->ID)) return false;
+        return $this->ID;
+    }
+
+    public function getName()
+    {
+        return $this->getId();
+    }
 }
 ?>

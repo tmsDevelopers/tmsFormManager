@@ -18,16 +18,8 @@ abstract  class BaseField extends BaseActions{
     protected $VALUE = '';
 
 
-    /*** label ***/
-    protected $LABEL = '';
-    protected $LABELPOSITION = 'left';
-    protected $LABEL_POSITIONS = array('left', 'right');
-
-
-    /*** required ***/
+      /*** required ***/
     protected $REQUIRED = false;
-    protected $REQUIRED_SYMBOL = '*';
-
 
     abstract public function LoadConfig(array $config=array());
     abstract public function getHTML() ; // get html code of
@@ -157,31 +149,6 @@ abstract  class BaseField extends BaseActions{
         return true;
     }
 
-    public function setLabel($label = '')
-    {
-        $label = trim($label);
-        $this->LABEL = $label;
-        return false;
-    }
-
-    public function getLabel()
-    {
-        return$this->LABEL;
-    }
-
-    public function setLabelposition($position='')
-    {
-        $position=\strtolower(trim($position));
-        if(!\in_array($position, $this->LABEL_POSITIONS )) return false;
-        $this->LABELPOSITION = $position;
-        return true;
-    }
-
-    public function getLabelposition()
-    {
-        return $this->LABELPOSITION;
-    }
-
     public function setRequired($required=false)
     {
         if(!\in_array($required,array(true, flase)))return false;
@@ -189,10 +156,9 @@ abstract  class BaseField extends BaseActions{
         return true;
     }
 
-    public function setRequiredsymbol($symbol='*')
+    protected function Load($config=array())
     {
-        $this->REQUIRED_SYMBOL = $symbol;
-        return true;
+       return true;
     }
 }
 ?>

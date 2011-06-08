@@ -12,7 +12,7 @@ namespace tmsFormManager;
 class FormManager {
     protected $Encoder = null;    // object of encoder
     protected $CONFIG = array() ; // array of forms configuration
-    protected $CURRENT_FORM_ID = ''; // id of form to work with
+    protected $CURRENT_FORM_ID = null; // id of form to work with
     protected $FORMS = array() ;    // array of form objects
 
     public function setEncoderMethod($method=NULL)
@@ -31,7 +31,7 @@ class FormManager {
 
     protected function cleen_vars()
     {
-        $this->CURRENT_FORM_ID = '';
+        $this->CURRENT_FORM_ID = null;
         
         if(count($this->FORMS)>0)
         {
@@ -112,6 +112,7 @@ class FormManager {
                 if(!\array_key_exists($id,  $this->FORMS))
                 {
                     $form = new \tmsFormManager\Form();
+                    $form->setId($id);
                     if($form->setConfig($this->CONFIG['forms'][$id]))
                     {
                         $form->buildForm();
@@ -127,17 +128,60 @@ class FormManager {
 
     public function getHTMLfield($id=NULL)
     {
-        if($this->CURRENT_FORM_ID == '')throw new \Exception('No form selected');
+        if(is_null($this->CURRENT_FORM_ID))throw new \Exception('No form selected');
         
         return $this->FORMS[$this->CURRENT_FORM_ID]->getHTMLfield($id);
     }
 
     public function setLineDelimiter($delimiter=NULL)
     {
-        if($this->CURRENT_FORM_ID == '')throw new \Exception('No form selected');
+        if(is_null($this->CURRENT_FORM_ID))throw new \Exception('No form selected');
 
         return $this->FORMS[$this->CURRENT_FORM_ID]->setLineDelimiter($delimiter);
     }
 
+    public function getHTMLform($id=null)
+    {
+        if(\is_null($id))
+            if(\is_null($this->CURRENT_FORM_ID)) throw new Exception('Form is not identified');
+            else
+            {
+                if(\key_exists($this->CURRENT_FORM_ID, $this->FORMS))
+                    return $this->FORMS[$this->CURRENT_FORM_ID]->getHTMLform();
+            }
+        else
+        {
+            $n=count($this->FORMS);
+            if($n==0)throw new Exception('no form to build');
+            if(\key_exists($id, $this->FORMS))
+                return $this->FORMS[$id]->getHTMLform();
+        }
+    }
+
+    public function getHTMLformsstarttag($id=null)
+    {
+        if(\is_null($id))
+            if(\is_null($this->CURRENT_FORM_ID)) throw new Exception('Form is not identified');
+            else
+            {
+                if(\key_exists($this->CURRENT_FORM_ID, $this->FORMS))
+                    return $this->FORMS[$this->CURRENT_FORM_ID]->getHTMLformstarttag();
+            }
+        else
+        {
+            $n=count($this->FORMS);
+            if($n==0)throw new Exception('no form to build');
+            if(\key_exists($id, $this->FORMS))
+                return $this->FORMS[$id]->getHTMLformstarttag();
+        }
+    }
+
+    public function getHTMLlabel4field($id=null)
+    {
+        if(\is_null($id))throw new Exception('field id is not defined');
+        if(is_null($this->CURRENT_FORM_ID))throw new \Exception('No form selected');
+
+        return $this->FORMS[$this->CURRENT_FORM_ID]->getHTMLlabel4field($id);
+    }
 }
 ?>

@@ -84,6 +84,15 @@ class Form {
                         $f_num = count($this->FIELDS);
                         $this->FIELDS[$f_num]['id'] = $field->getId();
                         $this->FIELDS[$f_num]['field'] = $field;
+
+                        $label_class = '\\tmsFormManager\\Label';
+                        if(\class_exists($label_class))
+                        {
+                            $label = new $label_class() ;
+                            $label->load($field_config);
+                            $label->setId($this->FIELDS[$f_num]['id']);
+                            $this->FIELDS[$f_num]['label'] = $label;
+                        }
                     }
 
                 }
@@ -124,7 +133,7 @@ class Form {
             if($this->FIELDS[$i]['id']==$id)
             {
                 $flag_field_exist = true;
-                $result .= $this->FIELDS[$i]['field']->getHTML().$this->LINE_DELIMITER;
+                $result .= $this->FIELDS[$i]['field']->getHTML();
 
                 if($id_num!= NULL)
                 {
@@ -208,5 +217,59 @@ class Form {
     {
         return $this->getId();
     }
+
+    public function getHTMLform()
+    {
+      $result = '';
+
+      $n = count($this->FIELDS);
+      for($i=0;$i<$n;$i++)
+      {
+          $field_html = $this->FIELDS[$i]['field']->getHTML($this->FIELDS[$i]['id']);
+          $field_html = $this->FIELDS[$i]['label']->getHTML($field_html);
+          $result .= $field_html.$this->LINE_DELIMITER;
+      }
+
+      $form_html = $this->getHTMLformstarttag();
+      
+      $result =$form_html.$result.'</form>';
+
+      return $result;
+    }
+    
+
+    public function getHTMLformstarttag()
+    {
+      $form_html = '';
+      $form_html = '<form ';
+      if(!\is_null($this->ACTION)) $form_html .= ' action="'.$this->ACTION.'" ';
+
+      $form_html .= ' method="'.$this->METHOD.'" ';
+
+      if(!\is_null($this->ID)) $form_html .= ' name="'.$this->ID.'" ';
+
+      if(\is_null($this->ENCTYPE))$this->ENCTYPE='application/x-www-form-urlencoded';
+      $form_html .= ' enctype="'.$this->ENCTYPE.'" ';
+
+      if(!\is_null($this->ACCEPTCHARSET)) $form_html .= ' accept-charset="'.$this->ACCEPTCHARSET.'" ';
+
+      $form_html.='>';
+      return $form_html;
+    }
+
+    public function getHTMLlabel4field($id=null)
+    {
+        if(\is_null($id))throw new Exception('field id is not defined');
+       
+        $n = count($this->FIELDS);
+        if(!$n)throw new Exception('Form has no fields');
+        for($i=0;$i<$n;$i++)
+        {
+            if($this->FIELDS[$i]['id']==$id)
+                return $this->FIELDS[$i]['label']->getHTML();
+        }
+        throw new Exception('No field with id='.$id.' in this form');        
+    }
+    
 }
 ?>

@@ -16,3 +16,10 @@ forms:
       -{id: select2, type: select, class: tmsinput, size: 2, value: [{value: 1}, {value: 2, title: two, selected: true}, {value: 3, disabled: true}]}
       -{id: select3, type: select, class: tmsinput, size: 2, multiple: true, value: [{value: 1}, {value: 2, selected: true}, {value: 3}, {value: 4, selected: true}]}
       -{id: "chbox1", type: checkbox, value: 'par1', checked: true, class: tmsinput, onclick: 'alert(753);'}
+  auth:
+    action: index.php?do=auth
+    fields:
+      -{id: login, type: text, size: 20, label: Login, required: true}
+      -{id: passwd, type: password, size: 20, label: Password}
+      -{id: "btnsubmit", type: inputsubmit, value: 'Submit'}
+      -{id: "btnreset", type: inputreset, value: 'Reset'}

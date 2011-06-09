@@ -21,39 +21,71 @@ class Label {
     protected $REQUIRED = false;
     protected $REQUIRED_SYMBOL = '*';
 
-     public function setLabel($label = '')
+    /**
+     * Method set label text
+     * @param string $label
+     * @return boolean
+     */
+    public function setLabel($label = '')
     {
         $label = trim($label);
         $this->LABEL = $label;
         return false;
     }
 
+    /**
+     * Method return label text
+     * @return string
+     */
     public function getLabel()
     {
         return$this->LABEL;
     }
 
+    /**
+     * Method set FOR parametr of label
+     * @param String $id
+     * @return boolean
+     */
     public function setId($id='')
     {
         $this->ID= $id;
         return true;
     }
 
+     /**
+     * Method set FOR parametr of label
+     * @param String $id
+     * @return boolean
+     */
     public function setfor($id='')
     {
         return $this->setId($id);
     }
 
+    /**
+     * method return value of parametr FOR of label
+     * @return string
+     */
     public function getId()
     {
         return $this->ID;
     }
 
+    /**
+     * method return value of parametr FOR of label
+     * @return string
+     */
     public function getFor()
     {
         return $this->getId();
     }
 
+    /**
+     * Method set position of label near field
+     * @param string $position
+     * @return boolean
+     */
     public function setLabelposition($position='')
     {
         $position=\strtolower(trim($position));
@@ -62,11 +94,20 @@ class Label {
         return true;
     }
 
+    /**
+     * method return position of label
+     * @return boolean
+     */
     public function getLabelposition()
     {
         return $this->LABELPOSITION;
     }
 
+    /**
+     * Method set parametr Required
+     * @param boolean $required
+     * @return boolean
+     */
     public function setRequired($required=false)
     {
         if(!\in_array($required,array(true, flase)))return false;
@@ -74,12 +115,22 @@ class Label {
         return true;
     }
 
+    /**
+     * Method set required symbol
+     * @param  string $symbol
+     * @return boolean
+     */
     public function setRequiredsymbol($symbol='*')
     {
         $this->REQUIRED_SYMBOL = $symbol;
         return true;
     }
 
+    /**
+     * Method return html code of label
+     * @param string $html field code
+     * @return string
+     */
     public function getHTML($html='')
     {
         $result = '';
@@ -109,6 +160,11 @@ class Label {
 
     
 
+    /**
+     * Method load config of label on base of field config
+     * @param array $config
+     * @return boolean
+     */
     public function load($config = array())
     {
         

@@ -24,7 +24,8 @@ class Form {
     protected $DEFAULT_LINE_DELIMITER = '<br/>';
     protected $LINE_DELIMITER ='<br/>';
 
-        /**
+
+    /**
      * метод устанавливает конфигурационные параметры
      * @param array $config
      * @return boolean
@@ -213,6 +214,14 @@ class Form {
         return $this->ID;
     }
 
+    /**
+     * Method return number of fields in form
+     * @return integer
+     */
+    public function getFieldNUM()
+    {
+        return count($this->FIELDS);
+    }
     public function getName()
     {
         return $this->getId();
@@ -270,6 +279,12 @@ class Form {
         }
         throw new Exception('No field with id='.$id.' in this form');        
     }
-    
+
+    public function processForm($object=null)
+    {
+        
+    }
+
+       
 }
 ?>

@@ -11,7 +11,7 @@ namespace tmsFormManager;
 
 class Form {
 
-    protected  $CONFIG = array() ;  // array of configuration parametrs
+    protected $CONFIG = array() ;  // array of configuration parametrs
     protected $FIELDS = array() ; // array of fieldobjects
 
     protected $ACCEPTCHARSET = null;
@@ -24,6 +24,8 @@ class Form {
     protected $DEFAULT_LINE_DELIMITER = '<br/>';
     protected $LINE_DELIMITER ='<br/>';
 
+
+    protected $CURRENT_FIELD = 0; // pointer to current field
 
     /**
      * метод устанавливает конфигурационные параметры
@@ -280,10 +282,64 @@ class Form {
         throw new Exception('No field with id='.$id.' in this form');        
     }
 
+    
+
+    public function getCurrentField()
+    {
+        $n = $this->getFieldNUM();
+        if(!$n)return false;
+        
+        if(($this->CURRENT_FIELD>=0)&&($this->CURRENT_FIELD<$n)) 
+        {
+            return $this->FIELDS[$this->CURRENT_FIELD]['field'];
+        }
+        return false;
+    }
+
+    public function getCurrentLabel()
+    {
+        $n = $this->getFieldNUM();
+        if(!$n)return false;
+
+        if(($this->CURRENT_FIELD>=0)&&($this->CURRENT_FIELD<$n))
+        {
+            return $this->FIELDS[$this->CURRENT_FIELD]['label'];
+        }
+        return false;
+    }
+
+    public function nextField()
+    {
+        $n = $this->getFieldNUM();
+        if(!$n)return false;
+
+        $next = $this->CURRENT_FIELD+1;
+        if($next>=$n)
+            return false;
+        else
+        {
+            $this->CURRENT_FIELD++;
+            return true;
+        }
+    }
+
+    public function setFirst()
+    {
+        $this->CURRENT_FIELD=0;
+        return true;
+    }
+
+
+
+
+
+
     public function processForm($object=null)
     {
         
     }
+
+
 
        
 }

@@ -1,0 +1,1 @@
+<table>{$REPEAT}<tr><td>{$LABEL}</td><td>{$FIELD}</td></tr>{/$REPEAT}</table>

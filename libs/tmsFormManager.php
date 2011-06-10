@@ -183,5 +183,31 @@ class FormManager {
 
         return $this->FORMS[$this->CURRENT_FORM_ID]->getHTMLlabel4field($id);
     }
+
+    public function RenderForm($view=null,$form_id = null )
+    {
+        if(\is_null($view))throw new Exception('you must specify view of form');
+
+        if(!class_exists('\\tmsFormManager\\FormViewer'))
+            throw new Exception('FormViewer class not exists');
+
+        $FormViewer = new \tmsFormManager\FormViewer();
+
+        if(\is_null($form_id))
+            if(\is_null($this->CURRENT_FORM_ID)) throw new Exception('Form is not identified');
+            else
+            {
+                if(\key_exists($this->CURRENT_FORM_ID, $this->FORMS))
+                    return $FormViewer->render($this->FORMS[$this->CURRENT_FORM_ID], $view);
+            }
+        else
+        {
+            $n=count($this->FORMS);
+            if($n==0)throw new Exception('no form to build');
+            if(\key_exists($form_id, $this->FORMS))
+                return $FormViewer->render($this->FORMS[$form_id], $view);
+        }
+        
+    }
 }
 ?>

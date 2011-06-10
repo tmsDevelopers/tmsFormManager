@@ -27,4 +27,8 @@ echo $form_manager->getHTMLfield('passwd');
 echo $form_manager->getHTMLfield('btnsubmit');
 echo $form_manager->getHTMLfield('btnreset');
 echo '</form>';
+
+?><h1>Rendered form</h1><?php
+echo $form_manager->RenderForm('table');
+
 ?>

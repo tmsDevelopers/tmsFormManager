@@ -102,6 +102,7 @@ class Form {
             }
         }
         
+        
     }
 
     /**
@@ -200,7 +201,7 @@ class Form {
     public function setId($id = null)
     {
         $id = trim($id);
-        if(($id=='') ||(\is_null($id)) )throw new Exception('Form must have ID (Name)');
+        if(($id=='') ||(\is_null($id)) )throw new \Exception('Form must have ID (Name)');
         $this->ID = $id;
         return true;
     }
@@ -270,16 +271,16 @@ class Form {
 
     public function getHTMLlabel4field($id=null)
     {
-        if(\is_null($id))throw new Exception('field id is not defined');
+        if(\is_null($id))throw new \Exception('field id is not defined');
        
         $n = count($this->FIELDS);
-        if(!$n)throw new Exception('Form has no fields');
+        if(!$n)throw new \Exception('Form has no fields');
         for($i=0;$i<$n;$i++)
         {
             if($this->FIELDS[$i]['id']==$id)
                 return $this->FIELDS[$i]['label']->getHTML();
         }
-        throw new Exception('No field with id='.$id.' in this form');        
+        throw new \Exception('No field with id='.$id.' in this form');
     }
 
     

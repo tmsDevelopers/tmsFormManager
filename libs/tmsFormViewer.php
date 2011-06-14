@@ -32,10 +32,10 @@ class FormViewer {
 
     public function render(\tmsFormManager\Form $form, $view=null)
     {
-       if(\is_null($view))throw new Exception('you must specify view of form');
+       if(\is_null($view))throw new \Exception('you must specify view of form');
 
        if(!$this->loadView($view))
-           throw new Exception('can not load view');
+           throw new \Exception('can not load view');
 
        $this->FORM = $form;
 
@@ -46,7 +46,7 @@ class FormViewer {
     {
         //$repeat = \preg_replace('/(\{\$FIELD\})/', 'eee', $repeat);
 
-        if(!\is_object($this->FORM))throw new Exception('Wrong form type');
+        if(!\is_object($this->FORM))throw new \Exception('Wrong form type');
 
         $result = '';
         
@@ -67,15 +67,15 @@ class FormViewer {
 
     protected  function loadView($view=null)
     {
-        if(\is_null($view))throw new Exception('you must specify view of form');
+        if(\is_null($view))throw new \Exception('you must specify view of form');
         $view = trim($view);
         if(!file_exists($this->PATH.$view.'.view'))
-            throw new Exception ('View file not exist');
+            throw new \Exception ('View file not exist');
             
         $this->VIEW_FILE = $this->PATH.$view.'.view';
         $content=\file_get_contents($this->VIEW_FILE);
         if($content===false)
-            throw new Exception('Error while loading view content');
+            throw new \Exception('Error while loading view content');
 
         $this->VIEW = $content;
         unset($content);

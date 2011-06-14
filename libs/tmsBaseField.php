@@ -160,5 +160,17 @@ abstract  class BaseField extends BaseActions{
     {
        return true;
     }
+
+    public function getGET()
+    {
+        $this->VALUE=$_GET[$this->ID];
+        return $this->VALUE;
+    }
+
+    public function getPOST()
+    {
+        $this->VALUE=$_POST[$this->ID];
+        return $this->VALUE;
+    }
 }
 ?>

@@ -7,23 +7,17 @@
  * @site tonymstudio.ru
  * @version 1
  */
+define ('tmsLIBS', 'libs');
+$path_parts = pathinfo(tmsLIBS);
 
-$tms_LIB_PATH = 'libs';
+$path = realpath($path_parts['dirname']).DIRECTORY_SEPARATOR.tmsLIBS;
+set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
-if(file_exists($tms_LIB_PATH.'/tmsIFencoder.php'))require_once $tms_LIB_PATH.'/tmsIFencoder.php';
-if(file_exists($tms_LIB_PATH.'/tmsBaseField.php'))require_once $tms_LIB_PATH.'/tmsBaseField.php';
-if(file_exists($tms_LIB_PATH.'/tmsEncoder.php'))require_once $tms_LIB_PATH.'/tmsEncoder.php';
-
-$dir = opendir($tms_LIB_PATH);
-
-while (false !==($file = readdir($dir)))
+function __autoload($classname)
 {
-   if(($file != 'tmsFormManager.inc.php') && (is_file($tms_LIB_PATH.'/'.$file) ) )
-   {
-       require_once ($file);
-   }
-   
-}
-closedir($dir);
+    $classname = preg_replace('/^[a-z\\\]+(\\\)/i', '', $classname);
 
+    if(file_exists(tmsLIBS.DIRECTORY_SEPARATOR.'tms'.$classname.'.php')) require_once (tmsLIBS.DIRECTORY_SEPARATOR.'tms'.$classname.'.php');
+    if(file_exists(tmsLIBS.DIRECTORY_SEPARATOR.$classname.'.php'))require_once (tmsLIBS.DIRECTORY_SEPARATOR.$classname.'.php');
+}
 ?>

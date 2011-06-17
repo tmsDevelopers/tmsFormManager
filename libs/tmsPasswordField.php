@@ -36,6 +36,7 @@ class PasswordField extends BaseField{
                 $this->setId ($this->getName());
         }
 
+        $this->Load($config) ;
         $this->setBaseActions($config);
 
     }

@@ -38,6 +38,8 @@ class TextField extends BaseField{
 
         $this->setBaseActions($config);
 
+        $this->Load($config) ;
+
     }
 
     /**

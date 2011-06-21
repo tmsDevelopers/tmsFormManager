@@ -331,16 +331,43 @@ class Form {
     }
 
 
-
-
-
-
     public function processForm($object=null)
     {
-        
+        if(!\is_object($object))$have_object = false;
+        else $have_object = true;
+
+        $n = $this->getFieldNUM();
+        if(!$n)return false;
+
+        for($i=0;$i<$n;$i++)
+        {
+            $method_name = 'IFM_set'.\strtoupper(\substr($this->FIELDS[$i]['id'],0, 1)).\substr($this->FIELDS[$i]['id'],1,strlen($this->FIELDS[$i]['id'])-1);
+            
+            if($this->METHOD=='get')
+            {
+                if(!$have_object) $this->FIELDS[$i]['field']->getGET();
+                else
+                {                    
+                    if(\method_exists($object, $method_name))
+                        $object->$method_name($this->FIELDS[$i]['field']->getGET());
+                }
+            }
+
+            if($this->METHOD=='post')
+            {
+                if(!$have_object) $this->FIELDS[$i]['field']->getPOST();
+                else
+                {
+                    if(\method_exists($object, $method_name))
+                        $object->$method_name($this->FIELDS[$i]['field']->getPOST());
+                }
+            }
+        }        
     }
 
 
+
+    
 
        
 }

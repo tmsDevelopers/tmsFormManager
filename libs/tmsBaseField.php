@@ -156,11 +156,6 @@ abstract  class BaseField extends BaseActions{
         return true;
     }
 
-    protected function Load($config=array())
-    {
-       return true;
-    }
-
     public function getGET()
     {
         $this->VALUE=$_GET[$this->ID];
@@ -172,5 +167,11 @@ abstract  class BaseField extends BaseActions{
         $this->VALUE=$_POST[$this->ID];
         return $this->VALUE;
     }
+
+    protected function Load($config=array())
+    {
+         return true;
+    }
+
 }
 ?>

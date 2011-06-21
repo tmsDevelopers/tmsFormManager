@@ -209,5 +209,15 @@ class FormManager {
         }
         
     }
+
+    public function processForm($object=null)
+    {
+        if(\is_null($this->CURRENT_FORM_ID)) throw new Exception('Form is not identified');
+        else
+        {
+            if(\key_exists($this->CURRENT_FORM_ID, $this->FORMS))
+                return $this->FORMS[$this->CURRENT_FORM_ID]->processForm($object);
+        }
+    }
 }
 ?>

@@ -31,4 +31,6 @@ echo '</form>';
 ?><h1>Rendered form</h1><?php
 echo $form_manager->RenderForm('table');
 
+$form_manager->processForm();
+
 ?>

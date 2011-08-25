@@ -1,18 +1,20 @@
 <?php
 /**
- * class SelectField to describe the field <select>
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
+ * класс описывает поле типа <select>
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;
 
 class SelectField  extends BaseField{
 
-    protected  $TYPE = 'select';
-    protected  $SIZE = 1;
-    protected  $MULTIPLE = false;
+    protected  $TYPE = 'select';    // тип поля
+    protected  $SIZE = 1;           // количество отображаемых строк списка
+    protected  $MULTIPLE = false;   //Позволяет одновременно выбирать сразу несколько элементов списка.
 
     /**
      * Метод настраевает пустой объект типа TextField на основании передаваемых параметров
@@ -129,6 +131,11 @@ class SelectField  extends BaseField{
         return true;
     }
 
+    /**
+     * метод задаёт можно ли одновременно выбирать сразу несколько элементов списка.
+     * @param boolean $multiple
+     * @return boolean
+     */
     public function setMultiple($multiple=false)
     {
         if(!\in_array($multiple, array (true, false)))return false;
@@ -137,6 +144,11 @@ class SelectField  extends BaseField{
         return true;
     }
 
+    /**
+     * метод "выбирает" требуемый пункт <option> по его значению
+     * @param string $value
+     * @return boolean
+     */
     public function setSelectedByValue($value = null)
     {
     	if(is_null($value))return false;
@@ -153,7 +165,12 @@ class SelectField  extends BaseField{
     	return false;
     }
 
-	public function setDeselectedByValue($value = null)
+     /**
+     * метод снимает метку "выбран" требуемого пункта <option> по его значению
+     * @param string $value
+     * @return boolean
+     */
+    public function setDeselectedByValue($value = null)
     {
     	if(is_null($value))return false;
 
@@ -169,24 +186,32 @@ class SelectField  extends BaseField{
     	return false;
     }
 
-   	public function SelectAll()
-   	{
-   		$n = count($this->VALUE);
-    	for($i=0;$i,$n;$i++)
-    	{
-    		$this->VALUE[$i]['selected']=true;
-    	}
-    	return true;
-   	}
+    /**
+     * Метод делает выбранными все пункты списка
+     * @return boolean
+     */
+    public function SelectAll()
+    {
+        $n = count($this->VALUE);
+        for($i=0;$i,$n;$i++)
+        {
+                $this->VALUE[$i]['selected']=true;
+        }
+        return true;
+    }
 
-	public function DeselectAll()
-   	{
-   		$n = count($this->VALUE);
-    	for($i=0;$i,$n;$i++)
-    	{
-    		$this->VALUE[$i]['selected']=false;
-    	}
-    	return true;
-   	}
+    /**
+     * метод снимает метку выбора со всех пунктов списка
+     * @return boolean
+     */
+    public function DeselectAll()
+    {
+        $n = count($this->VALUE);
+        for($i=0;$i,$n;$i++)
+        {
+                $this->VALUE[$i]['selected']=false;
+        }
+        return true;
+    }
 }
 ?>

@@ -1,29 +1,40 @@
 <?php
 /**
- * class BaseField used to describe base properties and action common to all fields
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * Базовый класс описывающий наиболее общие свойства и методы полей
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
-
 namespace tmsFormManager;
 
 abstract  class BaseField extends BaseActions{
-    protected $CLASS = '';
-    protected $ID = '';
-    protected $NAME = '';
-    protected $TYPE = '';
-    protected $VALUE = '';
+    protected $CLASS = '';  // class parametr
+    protected $ID = '';     // id parametr
+    protected $NAME = '';   // name parametr
+    protected $TYPE = '';   // type parametr
+    protected $VALUE = '';  // value parametr
 
 
       /*** required ***/
     protected $REQUIRED = false;
 
-    abstract public function LoadConfig(array $config=array());
-    abstract public function getHTML() ; // get html code of
-    abstract public function setValue(); // Метод задаёт значение параметра value элемента
+    /**
+     * метод позволяющий производить автонастройку поля
+     */
+    abstract public function LoadConfig(array $config=array()); 
+
+    /**
+     * Метод возвращает html код поля
+     */
+    abstract public function getHTML() ;
+
+    /**
+     *  Метод задаёт значение параметра value элемента
+     */
+    abstract public function setValue();
 
     /**
      * метод возвращает строку с параметрами наиболее общими для элементов (name, id, class...)
@@ -43,7 +54,7 @@ abstract  class BaseField extends BaseActions{
     }
 
     
-        /**
+    /**
      * Метод возвращает значение параметра class
      * @return string or false
      */
@@ -149,25 +160,43 @@ abstract  class BaseField extends BaseActions{
         return true;
     }
 
+    /**
+     * метод задаёт является ли поле обязательным к заполнению
+     * @param boolean $required
+     * @return boolean
+     */
     public function setRequired($required=false)
     {
-        if(!\in_array($required,array(true, flase)))return false;
+        if(!\in_array($required,array(true, false)))return false;
         $this->REQUIRED = $required;
         return true;
     }
 
+    /**
+     * метод принимает значение поля формы методом GET
+     * @return mixed
+     */
     public function getGET()
     {
         $this->VALUE=$_GET[$this->ID];
         return $this->VALUE;
     }
 
+    /**
+     * метод принимает значение поля методом POST
+     * @return mixed
+     */
     public function getPOST()
     {
         $this->VALUE=$_POST[$this->ID];
         return $this->VALUE;
     }
 
+    /**
+     * Метод загрушает настройки поля из массива
+     * @param array $config
+     * @return boolean
+     */
     protected function Load($config=array())
     {
          return true;

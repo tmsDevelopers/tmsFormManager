@@ -1,10 +1,11 @@
 <?php
 /**
- * class used to work with errors in processing form
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * Класс для работы с ошибками, возникающими при работе tmsFormManager
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;

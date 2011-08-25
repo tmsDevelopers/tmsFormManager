@@ -1,17 +1,18 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Класс поля типа <input type="hidden"
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
+ * @version 1
  */
 namespace tmsFormManager;
-/**
- * Description of tmsHiddenField
- *
- * @author chipset
- */
+
 class HiddenField extends TextField {
     //put your code here
 
-    protected  $TYPE = 'hidden';
+    protected  $TYPE = 'hidden'; // тип поля
 }
 ?>

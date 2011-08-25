@@ -1,21 +1,22 @@
 <?php
 /**
- * class InputimageField used to describe <input type="image"> field
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * класс описывает поле типа <input type="image">
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;
 
 class InputimageField extends BaseField{
     //put your code here
-    protected $TYPE = 'inputimage';
-    protected $SRC = '';
-    protected $BORDER = 0;
-    protected $VSPACE = 0;
-    protected $HSPACE = 0;
+    protected $TYPE = 'inputimage'; // тип поля
+    protected $SRC = '';            // атрибут src
+    protected $BORDER = 0;          // атрибут border
+    protected $VSPACE = 0;          // атрибут vspace
+    protected $HSPACE = 0;          // атрибут hspace
 
     /**
      * Метод настраевает пустой объект типа Inputimage на основании передаваемых параметров
@@ -72,13 +73,21 @@ class InputimageField extends BaseField{
 
     }
 
-
+    /**
+     * Метод задаёт значение несуществующего элемента
+     * @param null $value
+     * @return boolean
+     */
     public function  setValue($value = NULL)
     {
         return false;
     }
 
-
+    /**
+     * метод задаёт атрибут src
+     * @param string $src
+     * @return boolean
+     */
     public function setSrc($src = NULL)
     {
         if($src==NULL)return false;
@@ -87,6 +96,11 @@ class InputimageField extends BaseField{
         return true;
     }
 
+    /**
+     * метод задаёт атрибут border
+     * @param integer $border
+     * @return boolean
+     */
     public function setBorder($border = 0)
     {
         if(!\preg_match('/^[0-9]+$/', $border ))return false;
@@ -95,6 +109,11 @@ class InputimageField extends BaseField{
         return true;
     }
 
+    /**
+     * метод задаёт атрибут vspace
+     * @param integer $vspace
+     * @return boolean
+     */
     public function setVspace($vspace = 0)
     {
         if(!\preg_match('/^[0-9]+$/', $vspace ))return false;
@@ -103,6 +122,11 @@ class InputimageField extends BaseField{
         return true;
     }
 
+    /**
+     * метод задаёт атрибут hspace
+     * @param integer $hspace
+     * @return boolean
+     */
     public function setHspace($hspace = 0)
     {
         if(!\preg_match('/^[0-9]+$/', $hspace ))return false;
@@ -111,22 +135,38 @@ class InputimageField extends BaseField{
         return true;
     }
 
+    /**
+     * метод возвращает значение атрибут src
+     * @return string
+     */
     public function getSrc()
     {
         if($this->SRC=='')return false;
         return $this->SRC;
     }
 
+    /**
+     * метод возвращает значение атрибута border
+     * @return integer
+     */
     public function getBorder()
     {
         return $this->BORDER;
     }
 
+    /**
+     * метод возвращает значение атрибута vspace
+     * @return integer
+     */
     public function getVspace()
     {
         return $this->VSPACE;
     }
 
+    /**
+     * метод возвращает значение атрибута hspace
+     * @return integer
+     */
     public function getHspace()
     {
         return $this->HSPACE;

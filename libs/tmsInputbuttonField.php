@@ -1,10 +1,11 @@
 <?php
 /**
- * class InputbuttonField used to describe <input type="button"> field
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * класс описывает поле типа <input type="button">
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;
@@ -12,7 +13,7 @@ namespace tmsFormManager;
 class InputbuttonField extends BaseField {
 
     //put your code here
-    protected $TYPE = 'inputbutton';
+    protected $TYPE = 'inputbutton'; // тип поля
 
     /**
      * Метод настраевает пустой объект типа ImageInput на основании передаваемых параметров
@@ -59,6 +60,11 @@ class InputbuttonField extends BaseField {
     }
 
 
+    /**
+     * метод задаёт значение поля
+     * @param string $value
+     * @return boolean
+     */
     public function  setValue($value = NULL)
     {
         if($value==NULL)return false;

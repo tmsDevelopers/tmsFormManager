@@ -1,18 +1,19 @@
 <?php
 /**
- * class CheckboxField used to describe checkbox field
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * Класс описывает поле типа <input type="hidden"
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;
 
 class CheckboxField extends BaseField{
 
-    protected  $TYPE = 'checkbox';
-    protected  $CHECKED = false;
+    protected  $TYPE = 'checkbox';  // type
+    protected  $CHECKED = false;    // parametr checked
     
 
     /**

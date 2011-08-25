@@ -1,22 +1,28 @@
 <?php
 /**
- * class FormManager used to create an object to work with forms
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * Класс, формменеджера, с объектами которого пограммист и имеет дело
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;
 
 class FormManager {
-    protected $Encoder = null;    // object of encoder
-    protected $CONFIG = array() ; // array of forms configuration
-    protected $CURRENT_FORM_ID = null; // id of form to work with
-    protected $FORMS = array() ;    // array of form objects
+    protected $Encoder = null;          // object of encoder
+    protected $CONFIG = array() ;       // array of forms configuration
+    protected $CURRENT_FORM_ID = null;  // id of form to work with
+    protected $FORMS = array() ;        // array of form objects
 
-    protected $VIEWER_OBJ = null; // object of class FormViewer
+    protected $VIEWER_OBJ = null;       // object of class FormViewer
 
+    /**
+     * Метод задаёт формат конфигурационного файла
+     * @param string $method
+     * @return boolean
+     */
     public function setEncoderMethod($method=NULL)
     {
         if($method==NULL)return false;
@@ -30,6 +36,12 @@ class FormManager {
 
         return true;
     }
+
+    /**
+     * метод задаёт путь к каталогу с описанием отображений форм для декоратора
+     * @param string $etc
+     * @return boolean
+     */
     public function setViewerETC($etc=null)
     {
         if(!class_exists('\\tmsFormManager\\FormViewer'))
@@ -43,6 +55,9 @@ class FormManager {
 
     }
 
+    /**
+     * Метод очищает переменный формы
+     */
     protected function cleen_vars()
     {
         $this->CURRENT_FORM_ID = null;
@@ -56,6 +71,11 @@ class FormManager {
 
     }
 
+    /**
+     * метод указывает путь к конфигурационному файлу, описывающему формы
+     * @param string $file_path
+     * @return boolean
+     */
     public function setConfigfile(  $file_path=NULL)
     {
         if($file_path== NULL)return false;
@@ -64,6 +84,10 @@ class FormManager {
         return $this->Encoder->setConfigFile($file_path);
     }
 
+    /**
+     * метод осуществляет перезагрузку конфигурационной информации
+     * @return boolean
+     */
     public function ReloadConfig()
     {
         if(!is_object($this->Encoder)) return false;
@@ -83,7 +107,6 @@ class FormManager {
                 $this->createFormById($formid);
             }
         }
-        //print_r($this->CONFIG);
         return true;
     }
 
@@ -111,6 +134,11 @@ class FormManager {
         return false;
     }
 
+    /**
+     * Метод делает попытку создать объект формы по её id
+     * @param string $id
+     * @return boolean
+     */
     protected  function createFormById($id=NULL)
     {
         if($id == NULL)return false;
@@ -139,7 +167,11 @@ class FormManager {
         return false;
     }
 
-
+    /**
+     * метод возвращает html код поля по его id
+     * @param string $id
+     * @return string
+     */
     public function getHTMLfield($id=NULL)
     {
         if(is_null($this->CURRENT_FORM_ID))throw new \Exception('No form selected');
@@ -147,6 +179,11 @@ class FormManager {
         return $this->FORMS[$this->CURRENT_FORM_ID]->getHTMLfield($id);
     }
 
+    /**
+     * метод задаёт разделитель строк в форме, чтобы поля не выводились в одну строку
+     * @param string $delimiter
+     * @return boolean
+     */
     public function setLineDelimiter($delimiter=NULL)
     {
         if(is_null($this->CURRENT_FORM_ID))throw new \Exception('No form selected');
@@ -154,6 +191,11 @@ class FormManager {
         return $this->FORMS[$this->CURRENT_FORM_ID]->setLineDelimiter($delimiter);
     }
 
+    /**
+     * метод возвращает html код формы по её id
+     * @param string $id
+     * @return string
+     */
     public function getHTMLform($id=null)
     {
         if(\is_null($id))
@@ -172,6 +214,11 @@ class FormManager {
         }
     }
 
+    /**
+     * метод возвращает html код открывающего тега формы по её id
+     * @param string $id
+     * @return string
+     */
     public function getHTMLformsstarttag($id=null)
     {
         if(\is_null($id))
@@ -190,6 +237,11 @@ class FormManager {
         }
     }
 
+    /**
+     * метод возвращает html код лэйбла поля по его id
+     * @param string $id
+     * @return string
+     */
     public function getHTMLlabel4field($id=null)
     {
         if(\is_null($id))throw new Exception('field id is not defined');
@@ -198,6 +250,12 @@ class FormManager {
         return $this->FORMS[$this->CURRENT_FORM_ID]->getHTMLlabel4field($id);
     }
 
+    /**
+     * метод возвращает html код формы form_id от декоратора в соответствующем представлении
+     * @param string $view
+     * @param string $form_id
+     * @return string
+     */
     public function RenderForm($view=null,$form_id = null )
     {
         if(\is_null($view))throw new Exception('you must specify view of form');
@@ -225,6 +283,13 @@ class FormManager {
 
     }
 
+    /**
+     * метод запускает обработку данных формы от пользователя
+     * если в качестве аргумента указан объект. то он наполняется данными.
+     * Если аргумент опущен то форма наполняется данными водиночку
+     * @param object $object
+     * @return boolean
+     */
     public function processForm($object=null)
     {
         if(\is_null($this->CURRENT_FORM_ID)) throw new Exception('Form is not identified');
@@ -235,6 +300,11 @@ class FormManager {
         }
     }
 
+    /**
+     * метод возвращает ссылку на объект поля по его id
+     * @param string $id
+     * @return object
+     */
     public function Field($id=null)
     {
         if(\is_null($this->CURRENT_FORM_ID)) throw new Exception('Form is not identified');

@@ -1,20 +1,26 @@
 <?php
 /**
- * form viewer
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * Класс декоратора, позволяющего задавать формат представления формы
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;
 
 class FormViewer {
-    protected  $VIEW = '<table>{$REPEAT}<tr><td>{$LABEL}</td><td>{$FIELD}</td></tr>{/$REPEAT}</table>';
-    protected $PATH = 'etc/view/';
-    protected $VIEW_FILE = null;
-    protected $FORM = null;
+    protected  $VIEW = '<table>{$REPEAT}<tr><td>{$LABEL}</td><td>{$FIELD}</td></tr>{/$REPEAT}</table>'; // вид
+    protected $PATH = 'etc/view/';  // путь к каталогу видов
+    protected $VIEW_FILE = null;    // имя вида
+    protected $FORM = null;         // указатель на объект формы
 
+    /**
+     * Метод указывает путь к каталогу представлений
+     * @param string $etc
+     * @return boolean
+     */
     public function setViewerETC($etc=null)
     {
         if(\is_null($etc))return false;
@@ -23,6 +29,10 @@ class FormViewer {
         return true;
     }
 
+    /**
+     * метод ищет повторяющуюся часть вида и заменяет её тегами, после чего возвращает html код формы
+     * @return string
+     */
     protected function findRepeate()
     {
         //return \preg_replace_callback('/(\{\$REPEAT\}).+(\{\/\$REPEAT\})/', create_function('$matches', 'return $this->repeat($matches);'), $this->VIEW);
@@ -38,6 +48,12 @@ class FormViewer {
         return $result;
     }
 
+    /**
+     * Метод делает попытку декорирования объекта формы на основании указанного вида
+     * @param \tmsFormManager\Form $form
+     * @param string $view
+     * @return string
+     */
     public function render(\tmsFormManager\Form $form, $view=null)
     {
        if(\is_null($view))throw new \Exception('you must specify view of form');
@@ -50,6 +66,11 @@ class FormViewer {
        return $this->findRepeate() ;
     }
 
+    /**
+     * Метод осуществляет замену тегов вида на html теги
+     * @param string $repeat
+     * @return string
+     */
     protected function repeat($repeat=null)
     {
         //$repeat = \preg_replace('/(\{\$FIELD\})/', 'eee', $repeat);
@@ -73,6 +94,11 @@ class FormViewer {
         return $result;
     }
 
+    /**
+     * метод загружает данные указанного вида
+     * @param string $view
+     * @return boolean
+     */
     protected  function loadView($view=null)
     {
         if(\is_null($view))throw new \Exception('you must specify view of form');

@@ -1,7 +1,14 @@
 <?php
-/* 
+/**
  * example of the use tmsFormManager to generate fields and forms
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
+ * @version 1
  */
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL ^ E_NOTICE);
 echo '<pre>';

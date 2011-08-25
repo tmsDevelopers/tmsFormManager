@@ -1,16 +1,20 @@
 <?php
 /**
- * interface 
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * интерфейс енкодера 
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;
 
 interface IFencoder{
-    //public function ReloadConfigfile();    // load configuration into array
-    public    function setConfigfile();       // set path to configuration file
+
+    /**
+     * set path to configuration file
+     */
+    public    function setConfigfile();    
 }
 ?>

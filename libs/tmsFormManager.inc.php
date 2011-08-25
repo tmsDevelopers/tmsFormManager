@@ -1,10 +1,11 @@
 <?php
 /**
- * file for including all needed libraryes
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * Файл, подключающий все необходимые библиотеки пакета
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 define ('tmsLIBS', LIBS);

@@ -1,25 +1,26 @@
 <?php
 /**
- * class Label used to create labels for fields
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * класс описывает поле типа <label>
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;
 
 class Label {
 
-    protected $ID='';
+    protected $ID='';   // id поля
     /*** label ***/
-    protected $LABEL = '';
-    protected $LABELPOSITION = 'left';
-    protected $LABEL_POSITIONS = array('left', 'right', 'inside');
+    protected $LABEL = '';      // значение лэйбла
+    protected $LABELPOSITION = 'left';  // позиция лэйбла относительно поля
+    protected $LABEL_POSITIONS = array('left', 'right', 'inside'); // возможние позиции лэйбла относительно поля
 
     /*** required ***/
-    protected $REQUIRED = false;
-    protected $REQUIRED_SYMBOL = '*';
+    protected $REQUIRED = false; // является ли поле обязательным к заполнению
+    protected $REQUIRED_SYMBOL = '*'; // символ, который указывает на то что поле обязательно к заполнению
 
     /**
      * Method set label text

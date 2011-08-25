@@ -1,19 +1,24 @@
 <?php
 /**
- * class TextareaField used to describe textarea field
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * класс описывает поле типа <textarea>
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;
 
 class TextareaField extends BaseField {
-    protected $TYPE = 'textarea';
-    protected $COLS = false;  // default html
-    protected $ROWS = false;  // default html
+    protected $TYPE = 'textarea';   // тип поля
+    protected $COLS = false;  // атрибут cols
+    protected $ROWS = false;  // атрибут rows
 
+    /**
+     * Метод загружает конфигурационную информацию из массива
+     * @param array $config
+     */
     public function  LoadConfig(array $config = array())
     {
         if($config['id']!='')$this->setId ($config['id']);
@@ -35,6 +40,10 @@ class TextareaField extends BaseField {
         $this->setBaseActions($config);
     }
 
+    /**
+     * метод возвращает html код поля
+     * @return string
+     */
     public function getHTML()
     {
         if(($this->ID=='')&&($this->NAME==''))return false;

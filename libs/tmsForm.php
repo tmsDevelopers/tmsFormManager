@@ -1,28 +1,29 @@
 <?php
 /**
- * class Form used to create an object of selected form
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * Класс, служащий для описания формы и её структуры
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;
 
 class Form {
 
-    protected $CONFIG = array() ;  // array of configuration parametrs
-    protected $FIELDS = array() ; // array of fieldobjects
+    protected $CONFIG = array() ;   // array of configuration parametrs
+    protected $FIELDS = array() ;   // array of fieldobjects
 
-    protected $ACCEPTCHARSET = null;
-    protected $ACTION = null;
-    protected $ENCTYPE = null;
-    protected $METHOD = 'post';
-    protected $ID = null;
+    protected $ACCEPTCHARSET = null;    //Устанавливает кодировку, в которой сервер может принимать и обрабатывать данные формы.
+    protected $ACTION = null;           //Указывает обработчик, к которому обращаются данные формы при их отправке на сервер
+    protected $ENCTYPE = null;          //Определяет способ кодирования данных формы при их отправке на сервер
+    protected $METHOD = 'post';         //Атрибут method сообщает серверу о методе запроса.
+    protected $ID = null;               // атрибут id формы
 
 
-    protected $DEFAULT_LINE_DELIMITER = '<br/>';
-    protected $LINE_DELIMITER ='<br/>';
+    protected $DEFAULT_LINE_DELIMITER = '<br/>';    // Разделитель строк с полями поумолчанию
+    protected $LINE_DELIMITER ='<br/>';             // Разделитель строк с полями
 
 
     protected $CURRENT_FIELD = 0; // pointer to current field
@@ -41,6 +42,11 @@ class Form {
         return true;
     }
 
+    /**
+     * метод устанавливает разделитьль строк с полями, чтобы всё не выводилось в одну строку
+     * @param string $delimiter
+     * @return boolean
+     */
     public function setLineDelimiter($delimiter=NULL)
     {
         if($delimiter==NULL)
@@ -50,7 +56,7 @@ class Form {
         return true;
     }
 
-/**
+    /**
      * Метод создаёт форму из полей на основании переданной конфигурации
      */
     public function buildForm()
@@ -166,6 +172,11 @@ class Form {
         
     }
 
+    /**
+     * Метод устанавливает кодировку, в которой сервер может принимать и обрабатывать данные.
+     * @param string $charset
+     * @return boolean
+     */
     public function setAcceptcharset($charset=null)
     {
         $charset = trim($charset);
@@ -174,6 +185,11 @@ class Form {
         return true;
     }
 
+    /**
+     * метод устанавливает адрес программы или документа, который обрабатывает данные формы
+     * @param string $action
+     * @return boolean
+     */
     public function setAction($action=null)
     {
         $action = trim($action);
@@ -182,6 +198,11 @@ class Form {
         return true;
     }
 
+    /**
+     * метод устанавливает способ кодирования данных формы
+     * @param string $enctype
+     * @return boolean
+     */
     public function setEnctype($enctype=null)
     {
         $enctype = trim($enctype);
@@ -190,6 +211,11 @@ class Form {
         return true;
     }
 
+    /**
+     * метод устанавливает Метод протокола HTTP
+     * @param string $method
+     * @return boolean
+     */
     public function setMethod($method = 'post')
     {
         $method = \strtolower(trim($method));
@@ -198,6 +224,11 @@ class Form {
         return true;
     }
 
+    /**
+     * Метод задаёт атрибут id
+     * @param string $id
+     * @return boolean
+     */
     public function setId($id = null)
     {
         $id = trim($id);
@@ -206,11 +237,20 @@ class Form {
         return true;
     }
 
+    /**
+     * Метод задаёт атрибут name
+     * @param string $name
+     * @return boolean
+     */
     public function setName($name=null)
     {
         return $this->setId($name);
     }
 
+    /**
+     * Метод возвращает значение атрибута id
+     * @return string
+     */
     public function getId()
     {
         if(is_null($this->ID)) return false;
@@ -225,11 +265,20 @@ class Form {
     {
         return count($this->FIELDS);
     }
+
+    /**
+     * Метод возвращает значение атрибута name
+     * @return string
+     */
     public function getName()
     {
         return $this->getId();
     }
 
+    /**
+     * Метод возвращает html код формы
+     * @return string
+     */
     public function getHTMLform()
     {
       $result = '';
@@ -250,6 +299,10 @@ class Form {
     }
     
 
+    /**
+     * Метод возвращает html код открывающего тега формы
+     * @return string
+     */
     public function getHTMLformstarttag()
     {
       $form_html = '';
@@ -269,6 +322,11 @@ class Form {
       return $form_html;
     }
 
+    /**
+     * метод возвращает html код лэйбла для поля с id
+     * @param string $id
+     * @return string
+     */
     public function getHTMLlabel4field($id=null)
     {
         if(\is_null($id))throw new \Exception('field id is not defined');
@@ -284,7 +342,10 @@ class Form {
     }
 
     
-
+    /**
+     * Метод возвращает ссылку на объект текущего поля
+     * @return object
+     */
     public function getCurrentField()
     {
         $n = $this->getFieldNUM();
@@ -297,6 +358,10 @@ class Form {
         return false;
     }
 
+    /**
+     * метод возвращает ссылку на лэйбл текущего поля
+     * @return object
+     */
     public function getCurrentLabel()
     {
         $n = $this->getFieldNUM();
@@ -309,6 +374,10 @@ class Form {
         return false;
     }
 
+    /**
+     * Метод сдвигает указатель на следующее поле в массиве полей формы
+     * @return boolean
+     */
     public function nextField()
     {
         $n = $this->getFieldNUM();
@@ -324,6 +393,10 @@ class Form {
         }
     }
 
+    /**
+     * метод помещает указатель в массиве полей формы на первое поле
+     * @return boolean
+     */
     public function setFirst()
     {
         $this->CURRENT_FIELD=0;
@@ -331,6 +404,13 @@ class Form {
     }
 
 
+    /**
+     * Метод производит обработку формы.
+     * Принимает данные от пользователя и наполняет ими объект.
+     * Если задан аргумент, то данными наполняется и аргумен-объект
+     * @param object $object
+     * @return boolean
+     */
     public function processForm($object=null)
     {
         if(!\is_object($object))$have_object = false;
@@ -366,6 +446,11 @@ class Form {
     }
 
 
+    /**
+     * Метод возвращает указатель на объект поля по его id
+     * @param string $id
+     * @return object
+     */
     public function field($id=null)
     {
         if(\is_null($id))throw new \Exception('field id is not defined');

@@ -1,19 +1,20 @@
 <?php
 /**
- * class TextField used to describe text field
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * класс описывает поле типа <input type="text">
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;
 
 class TextField extends BaseField{
 
-    protected  $TYPE = 'text';
-    protected  $SIZE = 10;
-    protected  $MAXLENGTH = NULL;
+    protected  $TYPE = 'text';  // тип поля
+    protected  $SIZE = 10;      // размер поля поумолчанию
+    protected  $MAXLENGTH = NULL; // максимальный размер поля
 
     /**
      * Метод настраевает пустой объект типа TextField на основании передаваемых параметров

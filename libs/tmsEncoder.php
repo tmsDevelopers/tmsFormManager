@@ -1,20 +1,29 @@
 <?php
 /**
- * class Encoder is used to load configuration data from file to form manager object
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * Родительский класс для парсера файла конфигурации формы
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;
 
 abstract  class Encoder implements IFencoder{
 
-    protected   $CONFIG_FILE = '';
+    protected   $CONFIG_FILE = ''; // путь к конфигурационному полю
 
-    abstract  public  function ReloadConfigfile();
+    /**
+     * метод перезагрузки файла настроек
+     */
+    abstract  public  function ReloadConfigfile(); 
 
+    /**
+     * Метод указывает путь к файлу настройки форм
+     * @param ыекштп $path
+     * @return boolean
+     */
     public function setConfigfile($path =NULL)
     {
         if($path == NULL)return false; 

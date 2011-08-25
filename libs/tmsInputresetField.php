@@ -1,10 +1,11 @@
 <?php
 /**
- * class InputresetField used to describe <input type="reset"> field
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * класс описывает поле типа <input type="reset">
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;
@@ -60,6 +61,11 @@ class InputresetField extends BaseField {
     }
 
 
+    /**
+     * метод задаёт значение атрибута value
+     * @param string $value
+     * @return boolean
+     */
     public function  setValue($value = NULL)
     {
         if($value==NULL)return false;

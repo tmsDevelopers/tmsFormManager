@@ -1,19 +1,20 @@
 <?php
 /**
- * class PasswordField used to describe <input type="password"> field
- *
- * @author Morozov A.A.
- * @email morozov_aa@tonymstudio.ru
- * @site tonymstudio.ru
+ * класс описывает поле типа <input type="password">
+ * @author Morozov Anton Andreevich aamorozov83@gmail.com
+ * @link http://tonymstudio.ru
+ * @copyright Morozov Anton Andreevich
+ * @license GPLv3
+ * @package tmsFormManager
  * @version 1
  */
 namespace tmsFormManager;
 
 class PasswordField extends BaseField{
 
-    protected  $TYPE = 'password';
-    protected  $SIZE = 10;
-    protected  $MAXLENGTH = NULL;
+    protected  $TYPE = 'password'; // тип поля
+    protected  $SIZE = 10;          // размер поля поумолчанию
+    protected  $MAXLENGTH = NULL;   //максимальный размер поля
 
     /**
      * Метод настраевает пустой объект типа TextField на основании передаваемых параметров

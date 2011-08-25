@@ -60,7 +60,7 @@ class TextField extends BaseField{
         
         if($this->MAXLENGTH!=NULL)$result .=' maxlength="'.  $this->MAXLENGTH.'" ';
 
-        $result = '<input type="text" '.$result.'>';
+        $result = '<input type="'.$this->TYPE.'" '.$result.'>';
 
 
         return $result;

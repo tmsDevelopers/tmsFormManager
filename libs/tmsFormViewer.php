@@ -15,6 +15,14 @@ class FormViewer {
     protected $VIEW_FILE = null;
     protected $FORM = null;
 
+    public function setViewerETC($etc=null)
+    {
+        if(\is_null($etc))return false;
+
+        if((\file_exists($etc)) && (\is_dir($etc)))$this->PATH = $etc;
+        return true;
+    }
+
     protected function findRepeate()
     {
         //return \preg_replace_callback('/(\{\$REPEAT\}).+(\{\/\$REPEAT\})/', create_function('$matches', 'return $this->repeat($matches);'), $this->VIEW);
@@ -81,5 +89,7 @@ class FormViewer {
         unset($content);
         return true;
     }
+
+    
 }
 ?>

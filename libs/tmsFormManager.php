@@ -15,6 +15,8 @@ class FormManager {
     protected $CURRENT_FORM_ID = null; // id of form to work with
     protected $FORMS = array() ;    // array of form objects
 
+    protected $VIEWER_OBJ = null; // object of class FormViewer
+
     public function setEncoderMethod($method=NULL)
     {
         if($method==NULL)return false;
@@ -25,14 +27,26 @@ class FormManager {
         if(!class_exists($class_name)) return false;
 
         $this->Encoder = new $class_name();
-        
+
         return true;
+    }
+    public function setViewerETC($etc=null)
+    {
+        if(!class_exists('\\tmsFormManager\\FormViewer'))
+            throw new Exception('FormViewer class not exists');
+
+        if(!\is_object($this->VIEWER_OBJ))
+            $this->VIEWER_OBJ = new \tmsFormManager\FormViewer();
+
+        return $this->VIEWER_OBJ->setViewerETC($etc);
+
+
     }
 
     protected function cleen_vars()
     {
         $this->CURRENT_FORM_ID = null;
-        
+
         if(count($this->FORMS)>0)
         {
             foreach($this->FORMS as $form)
@@ -46,16 +60,16 @@ class FormManager {
     {
         if($file_path== NULL)return false;
         if(!is_object($this->Encoder)) return false;
-       
+
         return $this->Encoder->setConfigFile($file_path);
     }
 
     public function ReloadConfig()
     {
         if(!is_object($this->Encoder)) return false;
-        
+
         $config = $this->Encoder->ReloadConfigfile();
-        
+
         if(($config===false) || (!is_array($config)))return false;
 
         $this->CONFIG = $config;
@@ -129,7 +143,7 @@ class FormManager {
     public function getHTMLfield($id=NULL)
     {
         if(is_null($this->CURRENT_FORM_ID))throw new \Exception('No form selected');
-        
+
         return $this->FORMS[$this->CURRENT_FORM_ID]->getHTMLfield($id);
     }
 
@@ -191,23 +205,24 @@ class FormManager {
         if(!class_exists('\\tmsFormManager\\FormViewer'))
             throw new Exception('FormViewer class not exists');
 
-        $FormViewer = new \tmsFormManager\FormViewer();
+        if(!\is_object($this->VIEWER_OBJ))
+            $this->VIEWER_OBJ = new \tmsFormManager\FormViewer();
 
         if(\is_null($form_id))
             if(\is_null($this->CURRENT_FORM_ID)) throw new Exception('Form is not identified');
             else
             {
                 if(\key_exists($this->CURRENT_FORM_ID, $this->FORMS))
-                    return $FormViewer->render($this->FORMS[$this->CURRENT_FORM_ID], $view);
+                    return $this->VIEWER_OBJ->render($this->FORMS[$this->CURRENT_FORM_ID], $view);
             }
         else
         {
             $n=count($this->FORMS);
             if($n==0)throw new Exception('no form to build');
             if(\key_exists($form_id, $this->FORMS))
-                return $FormViewer->render($this->FORMS[$form_id], $view);
+                return $this->VIEWER_OBJ->render($this->FORMS[$form_id], $view);
         }
-        
+
     }
 
     public function processForm($object=null)
@@ -218,6 +233,17 @@ class FormManager {
             if(\key_exists($this->CURRENT_FORM_ID, $this->FORMS))
                 return $this->FORMS[$this->CURRENT_FORM_ID]->processForm($object);
         }
+    }
+
+    public function Field($id=null)
+    {
+        if(\is_null($this->CURRENT_FORM_ID)) throw new Exception('Form is not identified');
+        else
+        {
+            if(\key_exists($this->CURRENT_FORM_ID, $this->FORMS))
+                return $this->FORMS[$this->CURRENT_FORM_ID]->field($id);
+        }
+        throw new \Exception('field error');
     }
 }
 ?>

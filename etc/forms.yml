@@ -16,6 +16,7 @@ forms:
       -{id: select2, type: select, class: tmsinput, size: 2, value: [{value: 1}, {value: 2, title: two, selected: true}, {value: 3, disabled: true}]}
       -{id: select3, type: select, class: tmsinput, size: 2, multiple: true, value: [{value: 1}, {value: 2, selected: true}, {value: 3}, {value: 4, selected: true}]}
       -{id: "chbox1", type: checkbox, value: 'par1', checked: true, class: tmsinput, onclick: 'alert(753);'}
+      -{id: "hidden", type: hidden, value: 'single hidden test1', class: tmsinput'}
   auth:
     action: index.php?do=auth
     fields:

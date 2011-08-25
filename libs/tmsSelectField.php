@@ -57,7 +57,7 @@ class SelectField  extends BaseField{
         if($this->MULTIPLE===true) $result .= ' multiple="multiple" ';
 
         $options = '';
-        
+
         $n=count($this->VALUE);
         if($n>0)
         {
@@ -70,7 +70,7 @@ class SelectField  extends BaseField{
                 if($value_raw['selected'])$option .= ' selected="selected" ';
                 $option .= '>'.$value_raw['value_title'].'</option>';
 
-                $options .= $option;                
+                $options .= $option;
             }
         }
 
@@ -81,7 +81,7 @@ class SelectField  extends BaseField{
     }
 
     /**
-     * Метод устанавливает ширину элемента в символах 
+     * Метод устанавливает ширину элемента в символах
      * @param integer $size
      * @return boolean
      */
@@ -103,7 +103,7 @@ class SelectField  extends BaseField{
      */
     public function setValue($value_array='')
     {
-        
+
         if(!\is_array($value_array))throw new \Exception ('invalid value type. must be array');
 
         $n = count($value_array) ;
@@ -125,7 +125,7 @@ class SelectField  extends BaseField{
 
             $i++;
         }
-        
+
         return true;
     }
 
@@ -136,5 +136,57 @@ class SelectField  extends BaseField{
         $this->MULTIPLE = $multiple;
         return true;
     }
+
+    public function setSelectedByValue($value = null)
+    {
+    	if(is_null($value))return false;
+
+    	$n = count($this->VALUE);
+    	for($i=0;$i,$n;$i++)
+    	{
+    		if($this->VALUE[$i]['value']==$value)
+    		{
+    			$this->VALUE[$i]['selected']=true;
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+
+	public function setDeselectedByValue($value = null)
+    {
+    	if(is_null($value))return false;
+
+    	$n = count($this->VALUE);
+    	for($i=0;$i,$n;$i++)
+    	{
+    		if($this->VALUE[$i]['value']==$value)
+    		{
+    			$this->VALUE[$i]['selected']=false;
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+
+   	public function SelectAll()
+   	{
+   		$n = count($this->VALUE);
+    	for($i=0;$i,$n;$i++)
+    	{
+    		$this->VALUE[$i]['selected']=true;
+    	}
+    	return true;
+   	}
+
+	public function DeselectAll()
+   	{
+   		$n = count($this->VALUE);
+    	for($i=0;$i,$n;$i++)
+    	{
+    		$this->VALUE[$i]['selected']=false;
+    	}
+    	return true;
+   	}
 }
 ?>

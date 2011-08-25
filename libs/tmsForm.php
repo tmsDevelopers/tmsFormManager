@@ -366,6 +366,18 @@ class Form {
     }
 
 
+    public function field($id=null)
+    {
+        if(\is_null($id))throw new \Exception('field id is not defined');
+
+        $n = count($this->FIELDS);
+        for($i=0;$i<$n;$i++)
+        {
+            if($this->FIELDS[$i]['id']==$id)
+                return $this->FIELDS[$i]['field'];
+        }
+        throw new \Exception('no field with such id');
+    }
 
     
 

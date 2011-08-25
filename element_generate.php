@@ -5,7 +5,8 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL ^ E_NOTICE);
 echo '<pre>';
-if(file_exists('libs/tmsFormManager.inc.php'))require_once 'libs/tmsFormManager.inc.php';
+define('LIBS', 'libs/');
+if(file_exists(LIBS.'tmsFormManager.inc.php'))require_once (LIBS.'tmsFormManager.inc.php');
 
 $form_manager = new tmsFormManager\FormManager(); // создаём объект
 $form_manager->setEncoderMethod('YAML'); // указываем метод декодирования настроечного файла (вначале)
@@ -55,4 +56,10 @@ echo $form_manager->getHTMLfield('select3');
 ?><small><br>checkbox</small><br><?php
 echo $form_manager->getHTMLfield('chbox1');
 
+?><small><br>hidden</small><br><?php
+echo $form_manager->getHTMLfield('hidden');
+
+?><h1>Set value</h1><?php
+$form_manager->Field('singletxtname')->setValue('new text');
+echo $form_manager->getHTMLfield('singletxtname');
 ?>
